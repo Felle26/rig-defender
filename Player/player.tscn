@@ -19,3 +19,5 @@ texture = ExtResource("1_l8h54")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
