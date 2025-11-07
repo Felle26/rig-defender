@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://0tmrcm4tlfcs"]
+[gd_scene load_steps=6 format=4 uid="uid://0tmrcm4tlfcs"]
 
 [ext_resource type="PackedScene" uid="uid://xori8mcpocnc" path="res://Player/player.tscn" id="2_gmgay"]
 [ext_resource type="Texture2D" uid="uid://csvvhlc21te1t" path="res://textures/Spritesheet.png" id="2_x25rp"]
+[ext_resource type="PackedScene" uid="uid://b60app18s2h8w" path="res://props/Bullet/bullet.tscn" id="3_gmgay"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x25rp"]
 texture = ExtResource("2_x25rp")
@@ -38,3 +39,4 @@ tile_set = SubResource("TileSet_gmgay")
 
 [node name="Player" parent="." instance=ExtResource("2_gmgay")]
 position = Vector2(119, 90)
+Bullet = ExtResource("3_gmgay")

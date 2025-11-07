@@ -16,8 +16,21 @@ shape = SubResource("CircleShape2D_4ntmi")
 scale = Vector2(0.12500003, 0.11718747)
 texture = ExtResource("1_l8h54")
 
+[node name="Muzzle_machine_gun" type="Marker2D" parent="Icon"]
+position = Vector2(95.999985, 0)
+scale = Vector2(7.9999986, 8.533336)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
+
+[node name="Weapon" type="Node2D" parent="."]
+
+[node name="Weapon_Slot_1" type="Node2D" parent="Weapon"]
+
+[node name="Weapon_Slot_2" type="Node2D" parent="Weapon"]
+
+[node name="Timer" type="Timer" parent="Weapon"]
+one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
