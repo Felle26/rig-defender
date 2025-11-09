@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://xori8mcpocnc"]
+[gd_scene load_steps=6 format=3 uid="uid://xori8mcpocnc"]
 
 [ext_resource type="Script" uid="uid://baspmyk64u8of" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://cpltwhwqhb5ui" path="res://icon.svg" id="1_l8h54"]
+[ext_resource type="PackedScene" uid="uid://bprmed5ivv3cs" path="res://props/Rocket/rocket.tscn" id="2_gwnis"]
+[ext_resource type="PackedScene" uid="uid://b60app18s2h8w" path="res://props/Bullet/bullet.tscn" id="3_k53q1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ntmi"]
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_4ntmi")
+Rocket = ExtResource("2_gwnis")
+Bullet = ExtResource("3_k53q1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4ntmi")
@@ -18,7 +22,15 @@ texture = ExtResource("1_l8h54")
 
 [node name="Muzzle_machine_gun" type="Marker2D" parent="Icon"]
 position = Vector2(95.999985, 0)
-scale = Vector2(7.9999986, 8.533336)
+scale = Vector2(6, 6.4)
+
+[node name="Rocket_marker_left" type="Marker2D" parent="Icon"]
+position = Vector2(-7.6293945e-06, 102.400024)
+scale = Vector2(8, 8)
+
+[node name="Rocket_marker_right" type="Marker2D" parent="Icon"]
+position = Vector2(0, -102.400024)
+scale = Vector2(8, 8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -26,9 +38,7 @@ position_smoothing_enabled = true
 
 [node name="Weapon" type="Node2D" parent="."]
 
-[node name="Weapon_Slot_1" type="Node2D" parent="Weapon"]
-
-[node name="Weapon_Slot_2" type="Node2D" parent="Weapon"]
+[node name="Rocket_timer" type="Timer" parent="Weapon"]
 
 [node name="Timer" type="Timer" parent="Weapon"]
 one_shot = true

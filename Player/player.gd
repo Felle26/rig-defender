@@ -7,21 +7,32 @@ const FRICTION: float = 100.0
 
 
 var can_fire_machine_gun = true
+var can_fire_rockets = true
 var mouse_speed := 20.0
+#rocket settings
+var current_rocket_count : int = 10
+var rockets_left_fire: bool = true
 
+@export var Rocket : PackedScene
 @export var Bullet : PackedScene
-@export var Fire_rate_timer: float = 0.1
+@export var Fire_rate_timer: float = 0.1 #for Bullets
+@export var Rocket_fire_rate_timer: float = 2.0 #for Rockets
 
-
+@onready var rocket_timer: Timer = $Weapon/Rocket_timer
 @onready var timer: Timer = $Weapon/Timer
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var player_Sprite: Sprite2D = $Icon
+
+
 @onready var muzzle_machine_gun: Marker2D = $Icon/Muzzle_machine_gun
+@onready var rocket_marker_left: Marker2D = $Icon/Rocket_marker_left
+@onready var rocket_marker_right: Marker2D = $Icon/Rocket_marker_right
 
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	timer.timeout.connect(_on_machine_gun_can_fire)
+	rocket_timer.timeout.connect(_on_Rocket_can_fire)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -66,41 +77,37 @@ func controller_Input() -> void:
 		get_viewport().warp_mouse(mouse_pos)
 
 func fire_weapon():
-	var fire_ground: = false
-	var fire_air: = false
+	
 	if Input.is_action_pressed("fire_ground") and can_fire_machine_gun:
-		if fire_air == false:
-			fire_round()
-			can_fire_machine_gun = false
-			fire_ground = true
-			timer.wait_time = Fire_rate_timer
-			timer.start()
-			
-		
-			print_debug("test")
-		
-		
-	
-	if Input.is_action_just_released("fire_ground"):
-		fire_ground = false
-	
-	if Input.is_action_pressed("fire_air") and can_fire_machine_gun:
 		fire_round()
-		if fire_ground == false:
-			fire_air = true
-			can_fire_machine_gun = false
-			timer.wait_time = Fire_rate_timer
-			timer.start()
-		
-		
-	if Input.is_action_just_released("fire_air"):
-		fire_air = false
+		can_fire_machine_gun = false
+		timer.wait_time = Fire_rate_timer
+		timer.start()
 	
+	if Input.is_action_pressed("fire_air") and can_fire_rockets:
+		fire_rocket()
+		can_fire_rockets = false
+		rocket_timer.wait_time = Rocket_fire_rate_timer
+		rocket_timer.start()
+
 func fire_round()-> void:
 	var bullet = Bullet.instantiate()
 	owner.add_child(bullet)
 	bullet.transform = muzzle_machine_gun.global_transform
+
+func fire_rocket()->void:
+	var rocket = Rocket.instantiate()
+	owner.add_child(rocket)
+	if rockets_left_fire:
+		rocket.transform = rocket_marker_left.global_transform
+		rockets_left_fire = false
+	else:
+		rocket.transform = rocket_marker_right.global_transform
+		rockets_left_fire = true
+	
 	
 func _on_machine_gun_can_fire()-> void:
 	can_fire_machine_gun = true
-	
+
+func _on_Rocket_can_fire()-> void:
+	can_fire_rockets = true

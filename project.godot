@@ -21,6 +21,11 @@ window/size/viewport_width=800
 window/size/viewport_height=600
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+enemy_barrel="Group for Explosive Barrel"
+enemy=""
+
 [input]
 
 up={
