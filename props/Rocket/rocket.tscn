@@ -1,55 +1,53 @@
-[gd_scene load_steps=8 format=3 uid="uid://bprmed5ivv3cs"]
+[gd_scene load_steps=11 format=3 uid="uid://bprmed5ivv3cs"]
 
 [ext_resource type="Script" uid="uid://cl51ok82xrabk" path="res://props/Rocket/rocket.gd" id="1_ygs22"]
 [ext_resource type="Texture2D" uid="uid://3b5wgh0e8iv4" path="res://textures/rocket.png" id="2_pynf5"]
+[ext_resource type="Texture2D" uid="uid://du1k7anur1rii" path="res://textures/SteamTrail.png" id="3_rvcw6"]
+[ext_resource type="AudioStream" uid="uid://8wts83pen12l" path="res://props/audio/explosion.wav" id="5_jeck6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rvcw6"]
+radius = 27.073973
+
+[sub_resource type="PackedScene" id="PackedScene_h517x"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Damage_Radius", "process_mode", "monitoring", "Area2D", "CollisionShape2D", "position", "shape", "disabled"),
+"node_count": 2,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 4, 4, -1, 3, 5, 2, 6, 3, 7, 4, 0),
+"variants": [1, false, Vector2(-5, 1.0000002), SubResource("CircleShape2D_rvcw6"), true],
+"version": 3
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pynf5"]
 size = Vector2(12, 3.9999995)
 
-[sub_resource type="Animation" id="Animation_rvcw6"]
-resource_name = "rocket_fly"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rvcw6"]
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
-[sub_resource type="Animation" id="Animation_h517x"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h517x"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 0.5
+hue_variation_min = -2.2351742e-08
+hue_variation_max = -2.2351742e-08
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+turbulence_enabled = true
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jeck6"]
-_data = {
-&"RESET": SubResource("Animation_h517x"),
-&"rocket_fly": SubResource("Animation_rvcw6")
-}
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_pynf5"]
-radius = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_jeck6"]
+radius = 14.0
 
 [node name="Rocket" type="Area2D"]
 rotation = 1.5707964
 script = ExtResource("1_ygs22")
+Dmg_radius = SubResource("PackedScene_h517x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 1.0000001)
@@ -60,19 +58,26 @@ rotation = 3.1415927
 texture = ExtResource("2_pynf5")
 hframes = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Bullet_sprite")
-libraries = {
-&"": SubResource("AnimationLibrary_jeck6")
-}
-autoplay = "rocket_fly"
+[node name="smokeSpawner" type="Marker2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_rvcw6")
+position = Vector2(7, 0.9999997)
+amount = 50
+texture = ExtResource("3_rvcw6")
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_h517x")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2(1.0000002, 7)
-shape = SubResource("CircleShape2D_pynf5")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jeck6")
+
+[node name="Damage_Radius" type="Area2D" parent="."]
+position = Vector2(-7, 1.0000004)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage_Radius"]
+shape = SubResource("CircleShape2D_jeck6")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

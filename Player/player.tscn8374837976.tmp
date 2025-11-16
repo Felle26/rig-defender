@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://xori8mcpocnc"]
+[gd_scene load_steps=18 format=3 uid="uid://xori8mcpocnc"]
 
 [ext_resource type="Script" uid="uid://baspmyk64u8of" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="PackedScene" uid="uid://bprmed5ivv3cs" path="res://props/Rocket/rocket.tscn" id="2_gwnis"]
@@ -12,9 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://b7pet6tv5k0im" path="res://Player/helicopter/3_Idle.png" id="10_b1ygp"]
 [ext_resource type="Texture2D" uid="uid://blj7i5bcarkp5" path="res://Player/helicopter/4_Idle.png" id="11_o28un"]
 [ext_resource type="Texture2D" uid="uid://d0nh3hehyqot2" path="res://Player/helicopter/Helicopter_Rotor_Animation.png" id="12_o28un"]
-[ext_resource type="AudioStream" uid="uid://cb7mu2kvgcfgf" path="res://props/audio/Helicopter loop.mp3" id="13_p5o4e"]
-[ext_resource type="AudioStream" uid="uid://byrv53boairn" path="res://props/audio/Rocket_start.wav" id="14_gu6f8"]
-[ext_resource type="AudioStream" uid="uid://cj1teeq47irs1" path="res://props/audio/Machine_Gun_Fire.wav" id="15_dkpta"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ntmi"]
 
@@ -134,7 +131,6 @@ Bullet = ExtResource("3_k53q1")
 shape = SubResource("CircleShape2D_4ntmi")
 
 [node name="Icon" type="AnimatedSprite2D" parent="."]
-position = Vector2(5, 0)
 scale = Vector2(0.12500003, 0.11718747)
 sprite_frames = SubResource("SpriteFrames_gwnis")
 animation = &"Idle7"
@@ -153,7 +149,7 @@ one_shot = true
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
 [node name="Rotor" type="Sprite2D" parent="."]
-position = Vector2(-4, -3)
+position = Vector2(-10, -3)
 texture = ExtResource("12_o28un")
 hframes = 2
 
@@ -176,18 +172,3 @@ scale = Vector2(1.0000002, 0.93749976)
 [node name="Rocket_marker_right" type="Marker2D" parent="Fire_direction"]
 position = Vector2(0, -12.890622)
 scale = Vector2(1.0000002, 0.93749976)
-
-[node name="Audio_Files" type="Node2D" parent="."]
-
-[node name="Rotor Sound" type="AudioStreamPlayer" parent="Audio_Files"]
-stream = ExtResource("13_p5o4e")
-volume_db = -27.2
-autoplay = true
-
-[node name="Rocket_start" type="AudioStreamPlayer" parent="Audio_Files"]
-stream = ExtResource("14_gu6f8")
-volume_db = -13.6
-
-[node name="MachineGun" type="AudioStreamPlayer" parent="Audio_Files"]
-stream = ExtResource("15_dkpta")
-volume_db = -13.6

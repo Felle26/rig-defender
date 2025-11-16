@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cb7mu2kvgcfgf"
+path="res://.godot/imported/Helicopter loop.mp3-44ff7b40e80b65decabd16fb13df6b35.mp3str"
+
+[deps]
+
+source_file="res://props/audio/Helicopter loop.mp3"
+dest_files=["res://.godot/imported/Helicopter loop.mp3-44ff7b40e80b65decabd16fb13df6b35.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
