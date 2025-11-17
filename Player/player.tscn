@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://xori8mcpocnc"]
+[gd_scene load_steps=23 format=3 uid="uid://xori8mcpocnc"]
 
 [ext_resource type="Script" uid="uid://baspmyk64u8of" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="PackedScene" uid="uid://bprmed5ivv3cs" path="res://props/Rocket/rocket.tscn" id="2_gwnis"]
@@ -15,6 +15,8 @@
 [ext_resource type="AudioStream" uid="uid://cb7mu2kvgcfgf" path="res://props/audio/Helicopter loop.mp3" id="13_p5o4e"]
 [ext_resource type="AudioStream" uid="uid://byrv53boairn" path="res://props/audio/Rocket_start.wav" id="14_gu6f8"]
 [ext_resource type="AudioStream" uid="uid://cj1teeq47irs1" path="res://props/audio/Machine_Gun_Fire.wav" id="15_dkpta"]
+[ext_resource type="PackedScene" uid="uid://o07v6spdoajj" path="res://Player/ui/UI.tscn" id="16_lfmf2"]
+[ext_resource type="AudioStream" uid="uid://cotfnk06yy4if" path="res://props/audio/click.wav" id="17_pisgm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ntmi"]
 
@@ -142,6 +144,15 @@ animation = &"Idle7"
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Ui" parent="Camera2D/CanvasLayer" instance=ExtResource("16_lfmf2")]
+clip_contents = true
+
+[node name="Health_Bar" parent="Camera2D/CanvasLayer/Ui" index="0"]
+step = 1.0
 
 [node name="Weapon" type="Node2D" parent="."]
 
@@ -149,6 +160,9 @@ position_smoothing_enabled = true
 
 [node name="Timer" type="Timer" parent="Weapon"]
 one_shot = true
+
+[node name="Reload_Timer" type="Timer" parent="Weapon"]
+wait_time = 2.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
@@ -191,3 +205,9 @@ volume_db = -13.6
 [node name="MachineGun" type="AudioStreamPlayer" parent="Audio_Files"]
 stream = ExtResource("15_dkpta")
 volume_db = -13.6
+
+[node name="empty_mag" type="AudioStreamPlayer" parent="Audio_Files"]
+stream = ExtResource("17_pisgm")
+volume_db = -1.6
+
+[editable path="Camera2D/CanvasLayer/Ui"]

@@ -5,12 +5,18 @@ const SPEED: float = 300.0
 const ACCELERATION : float = 400.0
 const FRICTION: float = 100.0
 
+var max_Health: int = 100
+var current_Health: int = 100
 
-var can_fire_machine_gun = true
-var can_fire_rockets = true
+var max_rounds: int = 30
+var current_rounds: int = 30
+var can_fire_machine_gun: bool = true
+var can_fire_rockets: bool = true
+var reloading: bool = false
 var mouse_speed := 20.0
 #rocket settings
 var current_rocket_count : int = 10
+var max_rocket_count: int = 15
 var rockets_left_fire: bool = true
 var current_animation: String
 
@@ -18,6 +24,7 @@ var current_animation: String
 @export var Bullet : PackedScene
 @export var Fire_rate_timer: float = 0.1 #for Bullets
 @export var Rocket_fire_rate_timer: float = 2.0 #for Rockets
+@onready var reload_timer: Timer = $Weapon/Reload_Timer
 
 @onready var rocket_timer: Timer = $Weapon/Rocket_timer
 @onready var timer: Timer = $Weapon/Timer
@@ -28,6 +35,7 @@ var current_animation: String
 #Audio Stream Player
 @onready var rocket_fire: AudioStreamPlayer = $Audio_Files/Rocket_start
 @onready var machine_gun: AudioStreamPlayer = $Audio_Files/MachineGun
+@onready var empty_mag: AudioStreamPlayer = $Audio_Files/empty_mag
 
 
 
@@ -35,15 +43,24 @@ var current_animation: String
 @onready var rocket_marker_left: Marker2D = $Fire_direction/Rocket_marker_left
 @onready var rocket_marker_right: Marker2D = $Fire_direction/Rocket_marker_right
 
+#ui Components
+@onready var health_bar: ProgressBar = $Camera2D/CanvasLayer/Ui/Health_Bar
+@onready var rounds_bar: ProgressBar = $Camera2D/CanvasLayer/Ui/Rounds_Bar
+@onready var rocket_count: Label = $Camera2D/CanvasLayer/Ui/Label
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	timer.timeout.connect(_on_machine_gun_can_fire)
 	rocket_timer.timeout.connect(_on_Rocket_can_fire)
+	
+	rounds_bar.max_value = max_rounds
+	update_rockets_text()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 
 func _physics_process(delta: float) -> void:
 	current_animation = "Idle"
@@ -82,7 +99,7 @@ func _process(_delta):
 	
 	
 	
-	
+	#Gamepad Input
 func controller_Input() -> void:
 	
 	var x := Input.get_joy_axis(0.0, 2 as JoyAxis)  # rechter Stick horizontal
@@ -96,18 +113,31 @@ func controller_Input() -> void:
 func fire_weapon():
 	
 	if Input.is_action_pressed("fire_ground") and can_fire_machine_gun:
-		fire_round()
-		machine_gun.play()
-		can_fire_machine_gun = false
-		timer.wait_time = Fire_rate_timer
-		timer.start()
+		if current_rounds > 0:
+			current_rounds -= 1
+			update_machine_gun_bar()
+			fire_round()
+			machine_gun.play()
+			can_fire_machine_gun = false
+			timer.wait_time = Fire_rate_timer
+			timer.start()
+		if current_rounds == 0 and reloading == false:
+			reload_timer.start()
+			reloading = true
+		
+			
 	
 	if Input.is_action_pressed("fire_air") and can_fire_rockets:
-		fire_rocket()
-		rocket_fire.play()
-		can_fire_rockets = false
-		rocket_timer.wait_time = Rocket_fire_rate_timer
-		rocket_timer.start()
+		if current_rocket_count > 0:
+			current_rocket_count -= 1
+			update_rockets_text()
+			fire_rocket()
+			rocket_fire.play()
+			can_fire_rockets = false
+			rocket_timer.wait_time = Rocket_fire_rate_timer
+			rocket_timer.start()
+		else:
+			empty_mag.play()
 
 func fire_round()-> void:
 	var bullet = Bullet.instantiate()
@@ -130,3 +160,26 @@ func _on_machine_gun_can_fire()-> void:
 
 func _on_Rocket_can_fire()-> void:
 	can_fire_rockets = true
+
+#Damage Function
+func take_damage(dmg:int) -> void:
+	if current_Health > dmg:
+		current_Health -= dmg
+		update_Health()
+	else:
+		print("Dead")
+		current_Health = 0
+	update_Health()
+	
+func reloading_reset() -> void:
+	reloading = false
+	
+#UI Functionality
+func update_Health() -> void:
+	health_bar.value = current_Health
+
+func update_rockets_text() -> void:
+	rocket_count.text = str(current_rocket_count) + "/" + str(max_rocket_count)
+
+func update_machine_gun_bar()-> void:
+	rounds_bar.value = current_rounds

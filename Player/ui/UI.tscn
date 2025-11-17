@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://o07v6spdoajj"]
+
+[ext_resource type="Theme" uid="uid://c74svuj2mrlju" path="res://Player/ui/UI.tres" id="1_s55rx"]
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Health_Bar" type="ProgressBar" parent="."]
+self_modulate = Color(0.23529412, 1, 0, 1)
+top_level = true
+y_sort_enabled = true
+layout_mode = 0
+offset_left = 241.0
+offset_top = 554.0
+offset_right = 445.0
+offset_bottom = 594.0
+theme = ExtResource("1_s55rx")
+value = 100.0
+rounded = true
+
+[node name="Rounds_Bar" type="ProgressBar" parent="."]
+self_modulate = Color(1, 0, 0.05490196, 1)
+layout_mode = 0
+offset_left = 651.0
+offset_top = 524.0
+offset_right = 768.0
+offset_bottom = 546.0
+theme = ExtResource("1_s55rx")
+step = 1.0
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 709.0
+offset_top = 557.0
+offset_right = 765.0
+offset_bottom = 580.0
+theme = ExtResource("1_s55rx")
+text = "## / ##"

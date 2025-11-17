@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://pwqd7i3diai4"
+path="res://.godot/imported/Chiptune Action Suspense main.wav-d19ebb346d38f2b781206875283ccb1c.sample"
+
+[deps]
+
+source_file="res://props/audio/Suspense Action (RT 1.875)/Chiptune Action Suspense main.wav"
+dest_files=["res://.godot/imported/Chiptune Action Suspense main.wav-d19ebb346d38f2b781206875283ccb1c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

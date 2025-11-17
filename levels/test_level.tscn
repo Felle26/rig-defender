@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://0tmrcm4tlfcs"]
+[gd_scene load_steps=9 format=4 uid="uid://0tmrcm4tlfcs"]
 
 [ext_resource type="PackedScene" uid="uid://xori8mcpocnc" path="res://Player/player.tscn" id="2_gmgay"]
 [ext_resource type="Texture2D" uid="uid://csvvhlc21te1t" path="res://textures/Spritesheet.png" id="2_x25rp"]
+[ext_resource type="Script" uid="uid://dgukmps15jys1" path="res://props/OvaniPlugin/OvaniPlayer.gd" id="4_e7anx"]
 [ext_resource type="PackedScene" uid="uid://dthdejp3bcutg" path="res://props/Explosive_Barrel/explosive_barrel.tscn" id="4_w7r7j"]
+[ext_resource type="Script" uid="uid://bi77bimiopr4x" path="res://props/OvaniPlugin/OvaniSong.gd" id="5_ur00s"]
+[ext_resource type="Resource" uid="uid://bgc20jk81rprc" path="res://props/audio/Suspense Action (RT 1.875)/SuspenseRock.tres" id="6_wndkh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x25rp"]
 texture = ExtResource("2_x25rp")
@@ -49,3 +52,10 @@ position = Vector2(151, 27)
 
 [node name="Explosive_Barrel3" parent="." instance=ExtResource("4_w7r7j")]
 position = Vector2(150, 51)
+
+[node name="OvaniPlayer" type="Node" parent="."]
+script = ExtResource("4_e7anx")
+QueuedSongs = Array[ExtResource("5_ur00s")]([ExtResource("6_wndkh")])
+Volume = -20.769
+LoopQueue = true
+metadata/_custom_type_script = "uid://dgukmps15jys1"
