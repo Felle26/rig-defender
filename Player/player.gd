@@ -47,6 +47,8 @@ var current_animation: String
 @onready var health_bar: ProgressBar = $Camera2D/CanvasLayer/Ui/Health_Bar
 @onready var rounds_bar: ProgressBar = $Camera2D/CanvasLayer/Ui/Rounds_Bar
 @onready var rocket_count: Label = $Camera2D/CanvasLayer/Ui/Label
+@onready var reloading_label: Label = $Camera2D/CanvasLayer/Ui/reloadingLabel
+
 
 
 func _ready() -> void:
@@ -112,7 +114,7 @@ func controller_Input() -> void:
 
 func fire_weapon():
 	
-	if Input.is_action_pressed("fire_ground") and can_fire_machine_gun:
+	if Input.is_action_pressed("fire_ground") and (can_fire_machine_gun and reloading == false):
 		if current_rounds > 0:
 			current_rounds -= 1
 			update_machine_gun_bar()
@@ -122,6 +124,7 @@ func fire_weapon():
 			timer.wait_time = Fire_rate_timer
 			timer.start()
 		if current_rounds == 0 and reloading == false:
+			reloading_label.visible = true
 			reload_timer.start()
 			reloading = true
 		
@@ -172,7 +175,10 @@ func take_damage(dmg:int) -> void:
 	update_Health()
 	
 func reloading_reset() -> void:
+	current_rounds = max_rounds
 	reloading = false
+	update_machine_gun_bar()
+	reloading_label.visible = false
 	
 #UI Functionality
 func update_Health() -> void:
@@ -183,3 +189,8 @@ func update_rockets_text() -> void:
 
 func update_machine_gun_bar()-> void:
 	rounds_bar.value = current_rounds
+
+
+func _on_reload_timer_timeout() -> void:
+	reloading_reset()
+	

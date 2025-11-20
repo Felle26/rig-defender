@@ -163,6 +163,7 @@ one_shot = true
 
 [node name="Reload_Timer" type="Timer" parent="Weapon"]
 wait_time = 2.0
+one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
@@ -209,5 +210,7 @@ volume_db = -13.6
 [node name="empty_mag" type="AudioStreamPlayer" parent="Audio_Files"]
 stream = ExtResource("17_pisgm")
 volume_db = -1.6
+
+[connection signal="timeout" from="Weapon/Reload_Timer" to="." method="_on_reload_timer_timeout"]
 
 [editable path="Camera2D/CanvasLayer/Ui"]
