@@ -8,6 +8,8 @@ var speed = 400
 
 @export var Dmg_radius: PackedScene
 
+@export var rocket_dmg: int
+
 func _ready() -> void:
 	var timer = Timer.new()
 	timer.wait_time = 2
@@ -30,7 +32,7 @@ func explode_rocket(target: Node)-> void:
 	damage_radius.set_deferred("monitoring", true)
 	if target.has_method("hit") and (target.is_in_group("enemy") or target.is_in_group("enemy_barrel")):
 		explosion_sound.play()
-		target.hit()
+		target.hit(rocket_dmg)
 		queue_free()
 	queue_free()
 
@@ -47,13 +49,9 @@ func _on_area_entered(area: Area2D) -> void:
 
 func _on_damage_radius_area_entered(area: Area2D) -> void:
 	explode_rocket(area)
-	print("area entered")
-
 
 func _on_damage_radius_body_entered(body: Node2D) -> void:
 	explode_rocket(body)
-	print("body entered")
-
 
 func _on_gpu_particles_2d_2_finished() -> void:
 	queue_free()

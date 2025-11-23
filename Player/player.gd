@@ -25,12 +25,14 @@ var current_animation: String
 @export var Fire_rate_timer: float = 0.1 #for Bullets
 @export var Rocket_fire_rate_timer: float = 2.0 #for Rockets
 @onready var reload_timer: Timer = $Weapon/Reload_Timer
+var bullet_dmg: int = 5
 
 @onready var rocket_timer: Timer = $Weapon/Rocket_timer
 @onready var timer: Timer = $Weapon/Timer
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var player_Sprite: AnimatedSprite2D = $Icon
 @onready var fire_direction: Node2D = $Fire_direction
+var rocket_dmg: int = 15
 
 #Audio Stream Player
 @onready var rocket_fire: AudioStreamPlayer = $Audio_Files/Rocket_start
@@ -133,7 +135,7 @@ func fire_weapon():
 	if Input.is_action_pressed("fire_air") and can_fire_rockets:
 		if current_rocket_count > 0:
 			current_rocket_count -= 1
-			update_rockets_text()
+			rocket_count.text = "RELOADING" + "/" + str(max_rocket_count)
 			fire_rocket()
 			rocket_fire.play()
 			can_fire_rockets = false
@@ -144,11 +146,13 @@ func fire_weapon():
 
 func fire_round()-> void:
 	var bullet = Bullet.instantiate()
+	bullet.bullet_dmg = bullet_dmg
 	owner.add_child(bullet)
 	bullet.transform = muzzle_machine_gun.global_transform
 
 func fire_rocket()->void:
 	var rocket = Rocket.instantiate()
+	rocket.rocket_dmg = rocket_dmg
 	owner.add_child(rocket)
 	if rockets_left_fire:
 		rocket.transform = rocket_marker_left.global_transform
@@ -162,6 +166,7 @@ func _on_machine_gun_can_fire()-> void:
 	can_fire_machine_gun = true
 
 func _on_Rocket_can_fire()-> void:
+	update_rockets_text()
 	can_fire_rockets = true
 
 #Damage Function

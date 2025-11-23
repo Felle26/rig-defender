@@ -77,12 +77,14 @@ show_percentage = false
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 709.0
-offset_top = 557.0
-offset_right = 765.0
-offset_bottom = 580.0
+offset_left = 647.0
+offset_top = 556.0
+offset_right = 767.0
+offset_bottom = 579.0
 theme = ExtResource("1_s55rx")
 text = "## / ##"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="reloadingLabel" type="Label" parent="."]
 visible = false

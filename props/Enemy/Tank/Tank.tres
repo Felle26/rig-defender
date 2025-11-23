@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3 uid="uid://cbrxr6crlit5y"]
+
+[ext_resource type="Script" uid="uid://1o4oknor5hlf" path="res://props/Resources/Base_Enemy.gd" id="1_ewxdo"]
+
+[resource]
+script = ExtResource("1_ewxdo")
+name = "Tank"
+health = 100
+dmg_amount = 25
+movespeed = 50.0
+fire_rate = 1.0
+metadata/_custom_type_script = "uid://1o4oknor5hlf"

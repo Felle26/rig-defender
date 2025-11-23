@@ -8,6 +8,8 @@ size = Vector2(8, 5)
 
 [node name="Bullet" type="Area2D"]
 rotation = 1.5707964
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_mlqhk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -19,3 +21,4 @@ rotation = 1.5707964
 texture = ExtResource("2_42ysg")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
