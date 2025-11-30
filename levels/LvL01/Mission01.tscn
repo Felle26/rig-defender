@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=4 uid="uid://cywqhiu0hyc6t"]
+[gd_scene load_steps=11 format=4 uid="uid://cywqhiu0hyc6t"]
 
 [ext_resource type="PackedScene" uid="uid://xori8mcpocnc" path="res://Player/player.tscn" id="1_jwa78"]
 [ext_resource type="Script" uid="uid://iik770e23ema" path="res://levels/LvL01/mission_01.gd" id="1_lusvv"]
 [ext_resource type="TileSet" uid="uid://bi8hrvipemvab" path="res://levels/LvL01/Mission01.tres" id="2_178na"]
 [ext_resource type="TileSet" uid="uid://cpkksgnqfbf2m" path="res://levels/LvL01/DecorationTS.tres" id="2_vpphv"]
 [ext_resource type="PackedScene" uid="uid://dlbuq3wc0a8us" path="res://props/Enemy/APC/APC.tscn" id="4_ga2ys"]
+[ext_resource type="PackedScene" uid="uid://bd16xefn031mw" path="res://props/Pickups/RocketPickup.tscn" id="5_2asfr"]
 [ext_resource type="Resource" uid="uid://cvh4r8psea71q" path="res://props/Enemy/APC/APC_Res.tres" id="5_ok7m2"]
 [ext_resource type="PackedScene" uid="uid://b6cpqt5if672l" path="res://props/Enemy/Tank/tank.tscn" id="5_vrg1g"]
+[ext_resource type="PackedScene" uid="uid://qear3eaxc7mv" path="res://props/Pickups/HealthPickup.tscn" id="9_2asfr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_am75w"]
 size = Vector2(2536, 1440)
@@ -42,10 +44,26 @@ one_shot = true
 [node name="EnemyGroup" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_jwa78")]
-position = Vector2(17, 12)
+position = Vector2(19.88, -350)
+
+[node name="Ui" parent="Player/Camera2D/CanvasLayer" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Health_Bar" parent="Player/Camera2D/CanvasLayer/Ui" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Rounds_Bar" parent="Player/Camera2D/CanvasLayer/Ui" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" parent="Player/Camera2D/CanvasLayer/Ui" index="2"]
+metadata/_edit_use_anchors_ = true
 
 [node name="APC" parent="." instance=ExtResource("4_ga2ys")]
 position = Vector2(152, 280)
+data = ExtResource("5_ok7m2")
+
+[node name="APC4" parent="." instance=ExtResource("4_ga2ys")]
+position = Vector2(264, -32)
 data = ExtResource("5_ok7m2")
 
 [node name="APC2" parent="." instance=ExtResource("4_ga2ys")]
@@ -69,10 +87,44 @@ position = Vector2(608, -48)
 position = Vector2(1176, 64)
 
 [node name="Tank5" parent="." instance=ExtResource("5_vrg1g")]
-position = Vector2(-56, -168)
+position = Vector2(-184, -168)
 
 [node name="Tank6" parent="." instance=ExtResource("5_vrg1g")]
 position = Vector2(-568, -8)
+
+[node name="RocketPickup" parent="." instance=ExtResource("5_2asfr")]
+position = Vector2(424, -184)
+
+[node name="RocketPickup2" parent="." instance=ExtResource("5_2asfr")]
+y_sort_enabled = true
+position = Vector2(-336, 56)
+
+[node name="RocketPickup3" parent="." instance=ExtResource("5_2asfr")]
+y_sort_enabled = true
+position = Vector2(-104, 384)
+
+[node name="RocketPickup4" parent="." instance=ExtResource("5_2asfr")]
+y_sort_enabled = true
+position = Vector2(440, 216)
+
+[node name="RocketPickup5" parent="." instance=ExtResource("5_2asfr")]
+y_sort_enabled = true
+position = Vector2(344, 528)
+
+[node name="HealthPickup" parent="." instance=ExtResource("9_2asfr")]
+position = Vector2(-328, -160)
+
+[node name="HealthPickup3" parent="." instance=ExtResource("9_2asfr")]
+position = Vector2(184, 64)
+
+[node name="HealthPickup4" parent="." instance=ExtResource("9_2asfr")]
+position = Vector2(-616, 8)
+
+[node name="HealthPickup5" parent="." instance=ExtResource("9_2asfr")]
+position = Vector2(112, 440)
+
+[node name="HealthPickup2" parent="." instance=ExtResource("9_2asfr")]
+position = Vector2(64, -184)
 
 [connection signal="body_entered" from="World/LvlBound" to="." method="_on_lvl_bound_body_entered"]
 [connection signal="body_exited" from="World/LvlBound" to="." method="_on_lvl_bound_body_exited"]

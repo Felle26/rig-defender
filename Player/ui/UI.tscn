@@ -19,6 +19,25 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.5529412), Color(1, 1, 1, 1), Color(1, 1, 1, 0.48235294), Color(1, 1, 1, 1), Color(1, 1, 1, 0.45882353)]
 }
 
+[sub_resource type="Animation" id="Animation_686gg"]
+resource_name = "DeathFade"
+
+[sub_resource type="Animation" id="Animation_nu6in"]
+resource_name = "MissioAreaBlink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MissionArea:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.9999998, 0.017794853, 0.12298376, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_hi6cm"]
 length = 0.001
 tracks/0/type = "value"
@@ -45,25 +64,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_nu6in"]
-resource_name = "MissioAreaBlink"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../MissionArea:theme_override_colors/font_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.9999998, 0.017794853, 0.12298376, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_686gg"]
-resource_name = "DeathFade"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nu6in"]
 _data = {
@@ -193,4 +193,21 @@ grow_vertical = 2
 theme = ExtResource("1_s55rx")
 text = "Loading Menu in ##"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MissionInformation" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.68
+anchor_right = 1.0
+anchor_bottom = 0.37300003
+offset_left = -32.0
+offset_top = 16.0
+offset_right = -33.0
+offset_bottom = -167.80002
+grow_horizontal = 0
+theme = ExtResource("1_s55rx")
+theme_override_font_sizes/font_size = 29
+text = "08 / 17 Enemies"
+horizontal_alignment = 2
 vertical_alignment = 1

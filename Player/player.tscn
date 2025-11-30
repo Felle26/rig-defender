@@ -144,7 +144,7 @@ sprite_frames = SubResource("SpriteFrames_gwnis")
 animation = &"Idle1"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 

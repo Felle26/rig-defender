@@ -219,3 +219,20 @@ func death()-> void:
 func _on_load_mission_screen_timeout() -> void:
 	print_debug("Timer Timed out")
 	get_tree().change_scene_to_file("res://levels/MissionScreen/MissionScreen.tscn")
+
+func updateRockets(rockets: int) -> void:
+	if max_rocket_count < (current_rocket_count + rockets):
+		current_rocket_count = max_rocket_count
+		update_rockets_text()
+	else:
+		current_rocket_count += rockets
+		update_rockets_text()
+
+func UpdateHealth(Healthgain: int) -> void:
+	if max_Health < (current_Health + Healthgain):
+		current_Health = max_Health
+		update_Health()
+	
+	else:
+		current_Health += Healthgain
+		update_Health()
