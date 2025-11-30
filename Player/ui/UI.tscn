@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://o07v6spdoajj"]
+[gd_scene load_steps=7 format=3 uid="uid://o07v6spdoajj"]
 
 [ext_resource type="Theme" uid="uid://c74svuj2mrlju" path="res://Player/ui/UI.tres" id="1_s55rx"]
 
@@ -33,25 +33,58 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MissionArea:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nu6in"]
+resource_name = "MissioAreaBlink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MissionArea:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.9999998, 0.017794853, 0.12298376, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_686gg"]
+resource_name = "DeathFade"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nu6in"]
 _data = {
 &"Blink": SubResource("Animation_s55rx"),
+&"DeathFade": SubResource("Animation_686gg"),
+&"MissioAreaBlink": SubResource("Animation_nu6in"),
 &"RESET": SubResource("Animation_hi6cm")
 }
 
 [node name="Ui" type="Control"]
+y_sort_enabled = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="Health_Bar" type="ProgressBar" parent="."]
 self_modulate = Color(0.23529412, 1, 0, 1)
-top_level = true
 y_sort_enabled = true
 layout_mode = 0
 offset_left = 241.0
@@ -103,3 +136,61 @@ uppercase = true
 libraries = {
 &"": SubResource("AnimationLibrary_nu6in")
 }
+autoplay = "MissioAreaBlink"
+
+[node name="MissionArea" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.5
+offset_top = -16.0
+offset_right = 180.5
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_s55rx")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Fly Back, You´re Leaving the Combat Area"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DeathNote" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -11.5
+offset_right = 225.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_s55rx")
+theme_override_font_sizes/font_size = 24
+text = "Helicopter down, not operational"
+
+[node name="Label" type="Label" parent="DeathNote"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 31.5
+offset_right = 1.0
+offset_bottom = 31.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_s55rx")
+text = "Loading Menu in ##"
+horizontal_alignment = 1
+vertical_alignment = 1

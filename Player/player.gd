@@ -7,6 +7,7 @@ const FRICTION: float = 100.0
 
 var max_Health: int = 100
 var current_Health: int = 100
+var playerIsDead = false
 
 var max_rounds: int = 30
 var current_rounds: int = 30
@@ -45,12 +46,16 @@ var rocket_dmg: int = 15
 @onready var rocket_marker_left: Marker2D = $Fire_direction/Rocket_marker_left
 @onready var rocket_marker_right: Marker2D = $Fire_direction/Rocket_marker_right
 
+@onready var loadMissionScreenTimer: Timer = $LoadMissionScreen
+
+
 #ui Components
 @onready var health_bar: ProgressBar = $Camera2D/CanvasLayer/Ui/Health_Bar
 @onready var rounds_bar: ProgressBar = $Camera2D/CanvasLayer/Ui/Rounds_Bar
 @onready var rocket_count: Label = $Camera2D/CanvasLayer/Ui/Label
 @onready var reloading_label: Label = $Camera2D/CanvasLayer/Ui/reloadingLabel
-
+@onready var death_note: Label = $Camera2D/CanvasLayer/Ui/DeathNote
+@onready var animation_player: AnimationPlayer = $Camera2D/CanvasLayer/Ui/reloadingLabel/AnimationPlayer
 
 
 func _ready() -> void:
@@ -67,46 +72,50 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	current_animation = "Idle"
-	
-	
-	var input_vector := Vector2.ZERO
-	
-	input_vector.y = Input.get_axis("up", "down")
-	input_vector.x = Input.get_axis("left", "right")
-
-	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	if playerIsDead == false:
+		current_animation = "Idle"
 		
+		
+		var input_vector := Vector2.ZERO
+		
+		input_vector.y = Input.get_axis("up", "down")
+		input_vector.x = Input.get_axis("left", "right")
 
-	move_and_slide()
+		if input_vector != Vector2.ZERO:
+			velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			
+
+		move_and_slide()
 	
 func _process(_delta):
-	fire_weapon()
-	controller_Input()
-	#player_Sprite.look_at(get_global_mouse_position())
-	
-	var max_distance := 100.0
-	var dir := get_local_mouse_position().normalized()
-	#Fire Direction Rotation
-	fire_direction.rotation = dir.angle()
-	ray_cast_2d.target_position = dir * max_distance
-	ray_cast_2d.force_raycast_update()
-	
-	
-	#Calculation for Sprite Animation
-	var angle = snappedf(dir.angle(), PI/4) / (PI/4)
-	angle = wrapi(int(angle),0,8)
-	player_Sprite.animation = current_animation + str(angle)
+	if playerIsDead == false:
+		fire_weapon()
+		controller_Input()
+		#player_Sprite.look_at(get_global_mouse_position())
+		
+		var max_distance := 100.0
+		var dir := get_local_mouse_position().normalized()
+		#Fire Direction Rotation
+		fire_direction.rotation = dir.angle()
+		ray_cast_2d.target_position = dir * max_distance
+		ray_cast_2d.force_raycast_update()
+		
+		
+		#Calculation for Sprite Animation
+		var angle = snappedf(dir.angle(), PI/4) / (PI/4)
+		angle = wrapi(int(angle),0,8)
+		player_Sprite.animation = current_animation + str(angle)
 	
 	
 	
 	#Gamepad Input
 func controller_Input() -> void:
 	
+	@warning_ignore("narrowing_conversion")
 	var x := Input.get_joy_axis(0.0, 2 as JoyAxis)  # rechter Stick horizontal
+	@warning_ignore("narrowing_conversion")
 	var y := Input.get_joy_axis(0.0, 3 as JoyAxis)  # rechter Stick vertikal
 
 	if abs(x) > 0.1 or abs(y) > 0.1:
@@ -135,7 +144,7 @@ func fire_weapon():
 	if Input.is_action_pressed("fire_air") and can_fire_rockets:
 		if current_rocket_count > 0:
 			current_rocket_count -= 1
-			rocket_count.text = "RELOADING" + "/" + str(max_rocket_count)
+			rocket_count.text = "RELOADING" + " / " + str(max_rocket_count)
 			fire_rocket()
 			rocket_fire.play()
 			can_fire_rockets = false
@@ -175,9 +184,11 @@ func take_damage(dmg:int) -> void:
 		current_Health -= dmg
 		update_Health()
 	else:
-		print("Dead")
+		
 		current_Health = 0
+		death()
 	update_Health()
+	
 	
 func reloading_reset() -> void:
 	current_rounds = max_rounds
@@ -190,7 +201,7 @@ func update_Health() -> void:
 	health_bar.value = current_Health
 
 func update_rockets_text() -> void:
-	rocket_count.text = str(current_rocket_count) + "/" + str(max_rocket_count)
+	rocket_count.text = str(current_rocket_count) + " / " + str(max_rocket_count)
 
 func update_machine_gun_bar()-> void:
 	rounds_bar.value = current_rounds
@@ -199,3 +210,12 @@ func update_machine_gun_bar()-> void:
 func _on_reload_timer_timeout() -> void:
 	reloading_reset()
 	
+func death()-> void:
+	playerIsDead = true
+	get_tree().change_scene_to_file("res://levels/MissionScreen/MissionScreen.tscn")
+	
+
+
+func _on_load_mission_screen_timeout() -> void:
+	print_debug("Timer Timed out")
+	get_tree().change_scene_to_file("res://levels/MissionScreen/MissionScreen.tscn")

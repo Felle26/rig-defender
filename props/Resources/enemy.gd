@@ -3,12 +3,12 @@ extends CharacterBody2D
 @export var data: EnemyData
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var explosion_sound: AudioStreamPlayer2D = $Explosion_Sound
 @onready var fire_sound: AudioStreamPlayer2D = $Fire_Sound
 @onready var player_direction: RayCast2D = $Player_direction
 @onready var fire_rate_Timer: Timer = $Fire_rate
 @onready var bullet_spawner: Marker2D = $Player_direction/Bullet_Spawner
+@onready var enemy_sprite: AnimatedSprite2D = $enemy_sprite
 
 
 @export var Fire_Rate: float = .2
@@ -48,7 +48,7 @@ func hit(dmg: int) -> void:
 		progress_bar.value = 0
 		progress_bar.visible = false
 		animation_player.play("explosion")
-		animated_sprite_2d.visible = false
+		enemy_sprite.visible = false
 		explosion_sound.play()
 	
 func _update_health_Bar() -> void:

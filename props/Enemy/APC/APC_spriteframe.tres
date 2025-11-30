@@ -1,0 +1,82 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://b7x6d4jm8ujsa"]
+
+[ext_resource type="Texture2D" uid="uid://bydu7hnptmbr4" path="res://props/Enemy/APC/texture/frame_90.0_0003.png" id="1_kv5sd"]
+[ext_resource type="Texture2D" uid="uid://dw2k11adx6cg7" path="res://props/Enemy/APC/texture/frame_45.0_0006.png" id="2_tskct"]
+[ext_resource type="Texture2D" uid="uid://cirr0vky20qj4" path="res://props/Enemy/APC/texture/frame_0.0_0000.png" id="3_roabg"]
+[ext_resource type="Texture2D" uid="uid://itb45xb6yjlu" path="res://props/Enemy/APC/texture/frame_315.0_0003.png" id="4_c5d20"]
+[ext_resource type="Texture2D" uid="uid://doi0xxwspdk3a" path="res://props/Enemy/APC/texture/frame_270.0_0003.png" id="5_2m2km"]
+[ext_resource type="Texture2D" uid="uid://b6iepwfac2uaj" path="res://props/Enemy/APC/texture/frame_225.0_0003.png" id="6_kvq06"]
+[ext_resource type="Texture2D" uid="uid://b5repsjs0j7l7" path="res://props/Enemy/APC/texture/frame_180.0_0006.png" id="7_fe3xt"]
+[ext_resource type="Texture2D" uid="uid://da26pyutcgtla" path="res://props/Enemy/APC/texture/frame_135.0_0009.png" id="8_7lmyy"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kv5sd")
+}],
+"loop": true,
+"name": &"Idle0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tskct")
+}],
+"loop": true,
+"name": &"Idle1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_roabg")
+}],
+"loop": true,
+"name": &"Idle2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_c5d20")
+}],
+"loop": true,
+"name": &"Idle3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2m2km")
+}],
+"loop": true,
+"name": &"Idle4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_kvq06")
+}],
+"loop": true,
+"name": &"Idle5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_fe3xt")
+}],
+"loop": true,
+"name": &"Idle6",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_7lmyy")
+}],
+"loop": true,
+"name": &"Idle7",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

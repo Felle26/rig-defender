@@ -6,7 +6,7 @@ var speed = 400
 
 func _ready() -> void:
 	var timer = Timer.new()
-	timer.wait_time = 0.4
+	timer.wait_time = 0.6
 	timer.one_shot = true
 	timer.autostart = true
 	timer.timeout.connect(_on_timer_timeout)
@@ -39,3 +39,7 @@ func _do_damage(target:Node)->void:
 func _on_body_entered(body: Node2D) -> void:
 	_do_damage(body)
 	print_debug("Body_entered")
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()

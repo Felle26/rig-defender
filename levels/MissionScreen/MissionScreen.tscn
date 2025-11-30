@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://3pw52v4ahu7r"]
+
+[ext_resource type="Texture2D" uid="uid://dyc5xuapsiqix" path="res://levels/MissionScreen/Mission Screen.png" id="1_rdigl"]
+[ext_resource type="Script" uid="uid://bow6bjlocrxu2" path="res://levels/MissionScreen/mission_screen.gd" id="1_uqgsf"]
+[ext_resource type="FontFile" uid="uid://6mjdp7vtb68g" path="res://props/Fonts/VCR_OSD_MONO.ttf" id="2_7ir2s"]
+[ext_resource type="PackedScene" uid="uid://cywqhiu0hyc6t" path="res://levels/LvL01/Mission01.tscn" id="2_8xarp"]
+[ext_resource type="Texture2D" uid="uid://dj05ygs5gqv8f" path="res://textures/Cursor_finish.png" id="4_2lulu"]
+[ext_resource type="Texture2D" uid="uid://ckyetjuqrak43" path="res://textures/Cursor_active.png" id="5_ai5su"]
+[ext_resource type="Texture2D" uid="uid://dy3v724fnxxm7" path="res://textures/Crosshair.png" id="6_ai5su"]
+
+[node name="MissionScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uqgsf")
+LvL01 = ExtResource("2_8xarp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(400, 300)
+texture = ExtResource("1_rdigl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 546.0
+offset_top = 41.0
+offset_right = 776.0
+offset_bottom = 299.015
+alignment = 1
+
+[node name="MissionName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7ir2s")
+theme_override_font_sizes/font_size = 30
+text = "Valkyre"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="FlavorText" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_7ir2s")
+theme_override_fonts/bold_font = ExtResource("2_7ir2s")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 18
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Goals" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_7ir2s")
+theme_override_fonts/bold_font = ExtResource("2_7ir2s")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 18
+text = "Goal:
+
+Ensure that no hostile unit remains. The mission is considered successful only after the area is fully cleared."
+fit_content = true
+horizontal_alignment = 1
+threaded = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 544.0
+offset_top = 536.0
+offset_right = 584.0
+offset_bottom = 576.0
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Button2" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Start Mission"
+
+[node name="Mission_01" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 334.0
+offset_right = 204.0
+offset_bottom = 366.0
+toggle_mode = true
+texture_normal = ExtResource("4_2lulu")
+texture_pressed = ExtResource("5_ai5su")
+texture_hover = ExtResource("6_ai5su")
+
+[node name="Mission_02" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 218.0
+offset_top = 461.0
+offset_right = 250.0
+offset_bottom = 493.0
+toggle_mode = true
+texture_normal = ExtResource("4_2lulu")
+texture_pressed = ExtResource("5_ai5su")
+texture_hover = ExtResource("6_ai5su")
+
+[node name="Mission_03" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 354.0
+offset_right = 332.0
+offset_bottom = 386.0
+toggle_mode = true
+texture_normal = ExtResource("4_2lulu")
+texture_pressed = ExtResource("5_ai5su")
+texture_hover = ExtResource("6_ai5su")
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button2" to="." method="_onStartMissionPressed"]
+[connection signal="pressed" from="Mission_01" to="." method="_on_mission_01_pressed"]
+[connection signal="pressed" from="Mission_02" to="." method="_on_mission_02_pressed"]
+[connection signal="pressed" from="Mission_03" to="." method="_on_mission_03_pressed"]

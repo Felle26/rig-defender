@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://0tmrcm4tlfcs"]
+[gd_scene load_steps=12 format=4 uid="uid://0tmrcm4tlfcs"]
 
 [ext_resource type="PackedScene" uid="uid://xori8mcpocnc" path="res://Player/player.tscn" id="2_gmgay"]
 [ext_resource type="Texture2D" uid="uid://csvvhlc21te1t" path="res://textures/Spritesheet.png" id="2_x25rp"]
@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dthdejp3bcutg" path="res://props/Explosive_Barrel/explosive_barrel.tscn" id="4_w7r7j"]
 [ext_resource type="Script" uid="uid://bi77bimiopr4x" path="res://props/OvaniPlugin/OvaniSong.gd" id="5_ur00s"]
 [ext_resource type="Resource" uid="uid://bgc20jk81rprc" path="res://props/audio/Suspense Action (RT 1.875)/SuspenseRock.tres" id="6_wndkh"]
-[ext_resource type="PackedScene" uid="uid://bnbb23cmn1snm" path="res://props/Resources/Base_Enemy.tscn" id="7_ur00s"]
+[ext_resource type="PackedScene" uid="uid://dlbuq3wc0a8us" path="res://props/Enemy/APC/APC.tscn" id="7_wndkh"]
 [ext_resource type="Resource" uid="uid://cvh4r8psea71q" path="res://props/Enemy/APC/APC_Res.tres" id="8_wndkh"]
+[ext_resource type="PackedScene" uid="uid://b6cpqt5if672l" path="res://props/Enemy/Tank/tank.tscn" id="9_ly3hx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x25rp"]
 texture = ExtResource("2_x25rp")
@@ -59,10 +60,13 @@ Volume = -20.769
 LoopQueue = true
 metadata/_custom_type_script = "uid://dgukmps15jys1"
 
-[node name="BaseEnemy" parent="." instance=ExtResource("7_ur00s")]
-position = Vector2(-108, 21)
-scale = Vector2(0.13621412, 0.13808772)
+[node name="Player" parent="." instance=ExtResource("2_gmgay")]
+position = Vector2(21, 301)
+
+[node name="APC" parent="." instance=ExtResource("7_wndkh")]
+position = Vector2(343, 136)
 data = ExtResource("8_wndkh")
 
-[node name="Player" parent="." instance=ExtResource("2_gmgay")]
-position = Vector2(48, 142)
+[node name="Tank" parent="." instance=ExtResource("9_ly3hx")]
+position = Vector2(-217, 67)
+scale = Vector2(0.19004452, 0.19025147)

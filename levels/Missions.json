@@ -1,0 +1,17 @@
+{
+	"LvL01":{
+		"title": "Iron Path",
+		"Sitation": "The combat zone has been overrun by enemy forces. Our lines have been pushed back, and the supply situation is critical. The convoy carrying vital resources is ready, but its path is blocked.",
+		"Goal": "Eliminate all enemys"
+	},
+	"LvL02":{
+		"title": "Mission 02",
+		"Sitation": "Text 2",
+		"Goal": "Test 2"
+	},
+	"LvL03":{
+		"title": "Mission 03",
+		"Sitation": "Text 3",
+		"Goal": "Test 3"
+	}
+}

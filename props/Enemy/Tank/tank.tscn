@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://b6cpqt5if672l"]
+
+[ext_resource type="PackedScene" uid="uid://bnbb23cmn1snm" path="res://props/Resources/Base_Enemy.tscn" id="1_byq8g"]
+[ext_resource type="Resource" uid="uid://cbrxr6crlit5y" path="res://props/Enemy/Tank/Tank.tres" id="2_w25ln"]
+[ext_resource type="Texture2D" uid="uid://ftyr2srbbaji" path="res://props/Enemy/Tank/textures/frame_90.0_0002.png" id="3_upn2n"]
+[ext_resource type="Texture2D" uid="uid://d0dknq7mfdyii" path="res://props/Enemy/Tank/textures/frame_45.0_0002.png" id="4_cncl0"]
+[ext_resource type="Texture2D" uid="uid://budppylwtd2ss" path="res://props/Enemy/Tank/textures/frame_0.0_0004.png" id="5_nhh0d"]
+[ext_resource type="Texture2D" uid="uid://bqftoemum3vc8" path="res://props/Enemy/Tank/textures/frame_315.0_0002.png" id="6_ux6p4"]
+[ext_resource type="Texture2D" uid="uid://dktep5da8sfcl" path="res://props/Enemy/Tank/textures/frame_270.0_0002.png" id="7_v0vsu"]
+[ext_resource type="Texture2D" uid="uid://esi0am1uv5u0" path="res://props/Enemy/Tank/textures/frame_225.0_0002.png" id="8_epan6"]
+[ext_resource type="Texture2D" uid="uid://b8c63g6du63l1" path="res://props/Enemy/Tank/textures/frame_180.0_0002.png" id="9_xxs66"]
+[ext_resource type="Texture2D" uid="uid://bfknsv0udgagk" path="res://props/Enemy/Tank/textures/frame_135.0_0002.png" id="10_fb1d5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8g24n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_upn2n")
+}],
+"loop": true,
+"name": &"Idle0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cncl0")
+}],
+"loop": true,
+"name": &"Idle1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_nhh0d")
+}],
+"loop": true,
+"name": &"Idle2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ux6p4")
+}],
+"loop": true,
+"name": &"Idle3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_v0vsu")
+}],
+"loop": true,
+"name": &"Idle4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_epan6")
+}],
+"loop": true,
+"name": &"Idle5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_xxs66")
+}],
+"loop": true,
+"name": &"Idle6",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_fb1d5")
+}],
+"loop": true,
+"name": &"Idle7",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Tank" instance=ExtResource("1_byq8g")]
+scale = Vector2(0.19025147, 0.19025147)
+data = ExtResource("2_w25ln")
+
+[node name="enemy_sprite" type="AnimatedSprite2D" parent="." index="9"]
+scale = Vector2(3.159457, 3.159457)
+sprite_frames = SubResource("SpriteFrames_8g24n")
+animation = &"Idle0"

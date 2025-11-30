@@ -13,9 +13,13 @@ config_version=5
 config/name="Rig Defender"
 config/description="Helicopter Shoot'em'Up
 "
-run/main_scene="res://levels/test_level.tscn"
+run/main_scene="uid://drmuilvo5o3o8"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://dxtfklrkscr37"
+
+[autoload]
+
+GlobalScript="*res://props/Scripts/GlobalScript.gd"
 
 [display]
 

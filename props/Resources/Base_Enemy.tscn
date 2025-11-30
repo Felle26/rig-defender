@@ -1,93 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://bnbb23cmn1snm"]
+[gd_scene load_steps=12 format=3 uid="uid://bnbb23cmn1snm"]
 
 [ext_resource type="Script" uid="uid://denn8pkl438tf" path="res://props/Resources/enemy.gd" id="1_am758"]
-[ext_resource type="Texture2D" uid="uid://bydu7hnptmbr4" path="res://props/Enemy/APC/texture/frame_90.0_0003.png" id="1_jm8qa"]
-[ext_resource type="Texture2D" uid="uid://dw2k11adx6cg7" path="res://props/Enemy/APC/texture/frame_45.0_0006.png" id="2_am758"]
 [ext_resource type="PackedScene" uid="uid://cw311chx314x6" path="res://props/Enemy/enemy_bullet/enemy_bullet_apc.tscn" id="2_xwybj"]
-[ext_resource type="Texture2D" uid="uid://cirr0vky20qj4" path="res://props/Enemy/APC/texture/frame_0.0_0000.png" id="3_rj6of"]
-[ext_resource type="Texture2D" uid="uid://itb45xb6yjlu" path="res://props/Enemy/APC/texture/frame_315.0_0003.png" id="4_j1wwd"]
-[ext_resource type="Texture2D" uid="uid://doi0xxwspdk3a" path="res://props/Enemy/APC/texture/frame_270.0_0003.png" id="5_7qjt6"]
-[ext_resource type="Texture2D" uid="uid://b6iepwfac2uaj" path="res://props/Enemy/APC/texture/frame_225.0_0003.png" id="6_alfd5"]
-[ext_resource type="Texture2D" uid="uid://b5repsjs0j7l7" path="res://props/Enemy/APC/texture/frame_180.0_0006.png" id="7_xwybj"]
-[ext_resource type="Texture2D" uid="uid://da26pyutcgtla" path="res://props/Enemy/APC/texture/frame_135.0_0009.png" id="8_u2oaa"]
 [ext_resource type="Theme" uid="uid://c74svuj2mrlju" path="res://Player/ui/UI.tres" id="10_rj6of"]
 [ext_resource type="Texture2D" uid="uid://brplfrqlt75hs" path="res://textures/Barrel_Explosion.png" id="11_j1wwd"]
 [ext_resource type="AudioStream" uid="uid://8wts83pen12l" path="res://props/audio/explosion.wav" id="12_7qjt6"]
 [ext_resource type="AudioStream" uid="uid://cj1teeq47irs1" path="res://props/audio/Machine_Gun_Fire.wav" id="13_alfd5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ukgxs"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_a81r2"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_jm8qa")
-}],
-"loop": true,
-"name": &"Idle0",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_am758")
-}],
-"loop": true,
-"name": &"Idle1",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_rj6of")
-}],
-"loop": true,
-"name": &"Idle2",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_j1wwd")
-}],
-"loop": true,
-"name": &"Idle3",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_7qjt6")
-}],
-"loop": true,
-"name": &"Idle4",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_alfd5")
-}],
-"loop": true,
-"name": &"Idle5",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_xwybj")
-}],
-"loop": true,
-"name": &"Idle6",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_u2oaa")
-}],
-"loop": true,
-"name": &"Idle7",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="Animation" id="Animation_vxyyq"]
 length = 0.001
@@ -149,10 +69,6 @@ bullet = ExtResource("2_xwybj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(10.82722, 10.82722)
 shape = SubResource("CircleShape2D_ukgxs")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_a81r2")
-animation = &"Idle7"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 modulate = Color(1, 0, 0, 1)

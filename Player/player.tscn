@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://cotfnk06yy4if" path="res://props/audio/click.wav" id="17_pisgm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ntmi"]
+radius = 17.464249
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gwnis"]
 animations = [{
@@ -140,10 +141,10 @@ shape = SubResource("CircleShape2D_4ntmi")
 position = Vector2(5, 0)
 scale = Vector2(0.12500003, 0.11718747)
 sprite_frames = SubResource("SpriteFrames_gwnis")
-animation = &"Idle7"
+animation = &"Idle1"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 
@@ -212,6 +213,11 @@ volume_db = -13.6
 stream = ExtResource("17_pisgm")
 volume_db = -1.6
 
+[node name="LoadMissionScreen" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="Weapon/Reload_Timer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="LoadMissionScreen" to="." method="_on_load_mission_screen_timeout"]
 
 [editable path="Camera2D/CanvasLayer/Ui"]
