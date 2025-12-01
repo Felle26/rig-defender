@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://drmuilvo5o3o8"]
+[gd_scene load_steps=8 format=3 uid="uid://drmuilvo5o3o8"]
 
 [ext_resource type="Texture2D" uid="uid://clr6elerxpykq" path="res://levels/TitleScreen/MainTitle_Screen800×600.png" id="1_7awxj"]
 [ext_resource type="Script" uid="uid://c8ad85pg45t57" path="res://levels/TitleScreen/title_screen.gd" id="1_p5adb"]
 [ext_resource type="FontFile" uid="uid://6mjdp7vtb68g" path="res://props/Fonts/VCR_OSD_MONO.ttf" id="2_d3vws"]
+[ext_resource type="Theme" uid="uid://c74svuj2mrlju" path="res://Player/ui/UI.tres" id="4_q8tf3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p5adb"]
 bg_color = Color(0.7921569, 0.6313726, 0.42352942, 1)
@@ -53,6 +54,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_p5adb")
 text = "Start Game"
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7921569, 0.6313726, 0.42352942, 1)
 theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
@@ -73,6 +75,32 @@ theme_override_fonts/font = ExtResource("2_d3vws")
 theme_override_styles/hover = SubResource("StyleBoxFlat_p8cwb")
 text = "Exit Game
 "
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 271.99997
+offset_right = 283.0
+offset_bottom = 372.99997
+rotation = -0.26498735
+theme = ExtResource("4_q8tf3")
+theme_override_font_sizes/font_size = 19
+text = "W / A / S / D for Movement
+Mouse Rotation
+LMB fire Rounds
+RMB for Rockets"
+
+[node name="Thanks" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 141.0
+offset_top = 437.0
+offset_right = 680.0
+offset_bottom = 460.0
+rotation = 0.10778556
+theme = ExtResource("4_q8tf3")
+theme_override_font_sizes/font_size = 23
+text = "Thanks for Playing the Game, please Rate"
 
 [connection signal="pressed" from="VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/EXIT" to="." method="_on_exit_pressed"]

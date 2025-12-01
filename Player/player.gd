@@ -33,7 +33,7 @@ var bullet_dmg: int = 5
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var player_Sprite: AnimatedSprite2D = $Icon
 @onready var fire_direction: Node2D = $Fire_direction
-var rocket_dmg: int = 15
+var rocket_dmg: int = 30
 
 #Audio Stream Player
 @onready var rocket_fire: AudioStreamPlayer = $Audio_Files/Rocket_start
@@ -212,9 +212,10 @@ func _on_reload_timer_timeout() -> void:
 	
 func death()-> void:
 	playerIsDead = true
-	get_tree().change_scene_to_file("res://levels/MissionScreen/MissionScreen.tscn")
+	call_deferred("_goToMissionScreen")
 	
-
+func _goToMissionScreen():
+	get_tree().change_scene_to_file("res://levels/MissionScreen/MissionScreen.tscn")
 
 func _on_load_mission_screen_timeout() -> void:
 	print_debug("Timer Timed out")

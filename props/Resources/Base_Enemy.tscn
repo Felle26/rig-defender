@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnbb23cmn1snm"]
+[gd_scene load_steps=14 format=3 uid="uid://bnbb23cmn1snm"]
 
 [ext_resource type="Script" uid="uid://denn8pkl438tf" path="res://props/Resources/enemy.gd" id="1_am758"]
 [ext_resource type="PackedScene" uid="uid://cw311chx314x6" path="res://props/Enemy/enemy_bullet/enemy_bullet_apc.tscn" id="2_xwybj"]
+[ext_resource type="PackedScene" uid="uid://qear3eaxc7mv" path="res://props/Pickups/HealthPickup.tscn" id="3_jm8qa"]
+[ext_resource type="PackedScene" uid="uid://bd16xefn031mw" path="res://props/Pickups/RocketPickup.tscn" id="4_am758"]
 [ext_resource type="Theme" uid="uid://c74svuj2mrlju" path="res://Player/ui/UI.tres" id="10_rj6of"]
 [ext_resource type="Texture2D" uid="uid://brplfrqlt75hs" path="res://textures/Barrel_Explosion.png" id="11_j1wwd"]
 [ext_resource type="AudioStream" uid="uid://8wts83pen12l" path="res://props/audio/explosion.wav" id="12_7qjt6"]
@@ -61,10 +63,12 @@ _data = {
 radius = 32.911392
 
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 12
+collision_mask = 12
 script = ExtResource("1_am758")
 bullet = ExtResource("2_xwybj")
+Healthdrop = ExtResource("3_jm8qa")
+Rocketdrop = ExtResource("4_am758")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(10.82722, 10.82722)
@@ -113,7 +117,11 @@ gizmo_extents = 0.0
 
 [node name="Fire_rate" type="Timer" parent="."]
 
+[node name="moveTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
 [connection signal="timeout" from="Fire_rate" to="." method="_on_fire_rate_timeout"]
+[connection signal="timeout" from="moveTimer" to="." method="_on_move_timer_timeout"]

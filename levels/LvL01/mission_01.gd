@@ -7,8 +7,8 @@ extends Node2D
 
 var PlayerIsOutside = false
 
-var DmgOutside:int = 10
-var doDamageIntervall: float = 0.5
+var DmgOutside:int = 1
+var doDamageIntervall: float = 0.05
 var DmgCounter = true
 
 @onready var enemies = get_tree().get_nodes_in_group("enemy")
@@ -21,10 +21,16 @@ func _ready() -> void:
 	missionInformation.text = str(count) + " / " + str(maxEnemies) + " Enemies"
 
 func updateMissionText() -> void:
-	enemies = get_tree().get_nodes_in_group("enemy")
-	count = enemies.size()
-	missionInformation.text = str(count) + " / " + str(maxEnemies) + " Enemies"
-	
+	if not enemies.size() == null:
+		enemies = get_tree().get_nodes_in_group("enemy")
+		count = enemies.size()
+		missionInformation.text = str(count) + " / " + str(maxEnemies) + " Enemies"
+		if count == 0:
+			missionInformation.text = "All Enemies Destroyed"
+			GlobalScript.mission_01_passed = true
+			var t = get_tree().create_timer(2.0)
+			await t.timeout
+			get_tree().change_scene_to_file("res://levels/TitleScreen/Title Screen.tscn")
 func _process(_delta: float) -> void:
 	if PlayerIsOutside == true and DmgCounter == true:
 		player.take_damage(DmgOutside)

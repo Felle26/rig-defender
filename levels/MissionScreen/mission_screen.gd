@@ -80,7 +80,7 @@ func _setMissionEmpty(currentMission: String ):
 	if currentMission == "LvL00":
 		mission_name.text = "---"
 		flavor_text.text = "Select a Mission to Start"
-		goals.text = ""
+		goals.text = "At the moment, only one mission can be played."
 		currentSelectedMission = "LvL00"
 
 
