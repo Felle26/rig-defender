@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Rig Defender"
-config/description="Helicopter Shoot'em'Up
+config/description="Helicopter Shoot'em'Up for the \"Game Off 2025\" Jam
 "
 run/main_scene="uid://drmuilvo5o3o8"
 config/features=PackedStringArray("4.5", "Forward Plus")
@@ -81,4 +81,5 @@ fire_air={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

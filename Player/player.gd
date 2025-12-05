@@ -21,8 +21,13 @@ var max_rocket_count: int = 15
 var rockets_left_fire: bool = true
 var current_animation: String
 
-@export var Rocket : PackedScene
+#instanciate pool for Rockets
+var rocket_pool: Array = []
+var pool_size: int = 40
+
+#@export var Rocket : PackedScene
 @export var Bullet : PackedScene
+@onready var Rocket: PackedScene = preload("res://props/Rocket/rocket.tscn")
 @export var Fire_rate_timer: float = 0.1 #for Bullets
 @export var Rocket_fire_rate_timer: float = 2.0 #for Rockets
 @onready var reload_timer: Timer = $Weapon/Reload_Timer
@@ -56,15 +61,17 @@ var rocket_dmg: int = 30
 @onready var reloading_label: Label = $Camera2D/CanvasLayer/Ui/reloadingLabel
 @onready var death_note: Label = $Camera2D/CanvasLayer/Ui/DeathNote
 @onready var animation_player: AnimationPlayer = $Camera2D/CanvasLayer/Ui/reloadingLabel/AnimationPlayer
-
+@onready var rocket = Rocket.instantiate()
 
 func _ready() -> void:
+	#fire_rocket()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	timer.timeout.connect(_on_machine_gun_can_fire)
 	rocket_timer.timeout.connect(_on_Rocket_can_fire)
 	
 	rounds_bar.max_value = max_rounds
 	update_rockets_text()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -145,8 +152,9 @@ func fire_weapon():
 		if current_rocket_count > 0:
 			current_rocket_count -= 1
 			rocket_count.text = "RELOADING" + " / " + str(max_rocket_count)
-			fire_rocket()
 			rocket_fire.play()
+			fire_rocket()
+			
 			can_fire_rockets = false
 			rocket_timer.wait_time = Rocket_fire_rate_timer
 			rocket_timer.start()
@@ -160,9 +168,9 @@ func fire_round()-> void:
 	bullet.transform = muzzle_machine_gun.global_transform
 
 func fire_rocket()->void:
-	var rocket = Rocket.instantiate()
+	rocket = Rocket.instantiate()
 	rocket.rocket_dmg = rocket_dmg
-	owner.add_child(rocket)
+	owner.call_deferred("add_child", rocket)
 	if rockets_left_fire:
 		rocket.transform = rocket_marker_left.global_transform
 		rockets_left_fire = false

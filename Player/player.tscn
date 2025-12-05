@@ -1,7 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://xori8mcpocnc"]
+[gd_scene load_steps=22 format=3 uid="uid://xori8mcpocnc"]
 
 [ext_resource type="Script" uid="uid://baspmyk64u8of" path="res://Player/player.gd" id="1_4ntmi"]
-[ext_resource type="PackedScene" uid="uid://bprmed5ivv3cs" path="res://props/Rocket/rocket.tscn" id="2_gwnis"]
 [ext_resource type="PackedScene" uid="uid://b60app18s2h8w" path="res://props/Bullet/bullet.tscn" id="3_k53q1"]
 [ext_resource type="Texture2D" uid="uid://c4nrq57hir8c2" path="res://Player/helicopter/-1_Idle.png" id="4_5htga"]
 [ext_resource type="Texture2D" uid="uid://chi2xomop0l2d" path="res://Player/helicopter/-2_Idle.png" id="5_p5o4e"]
@@ -131,7 +130,6 @@ collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_4ntmi")
-Rocket = ExtResource("2_gwnis")
 Bullet = ExtResource("3_k53q1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -198,7 +196,7 @@ scale = Vector2(1.0000002, 0.93749976)
 
 [node name="Rotor Sound" type="AudioStreamPlayer" parent="Audio_Files"]
 stream = ExtResource("13_p5o4e")
-volume_db = -27.2
+volume_db = -20.0
 autoplay = true
 
 [node name="Rocket_start" type="AudioStreamPlayer" parent="Audio_Files"]
@@ -207,7 +205,7 @@ volume_db = -13.6
 
 [node name="MachineGun" type="AudioStreamPlayer" parent="Audio_Files"]
 stream = ExtResource("15_dkpta")
-volume_db = -13.6
+volume_db = -10.0
 
 [node name="empty_mag" type="AudioStreamPlayer" parent="Audio_Files"]
 stream = ExtResource("17_pisgm")
